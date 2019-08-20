@@ -20,12 +20,24 @@ const MovieList = props => {
         getMovies();
     }, []);
 
+    const saveMovie = movie => {
+        props.addToSavedList(movie);
+    };
+
     return (
         <div className="movie-list">
             {movies.map(movie => (
-                <Link to={`/movies/${movie.id}`}>
-                    <MovieDetails key={movie.id} movie={movie} />
-                </Link>
+                <div style={{ display: 'flex' }}>
+                    <Link to={`/movies/${movie.id}`}>
+                        <MovieDetails key={movie.id} movie={movie} />
+                    </Link>
+                    <div
+                        className="save-button"
+                        onClick={() => saveMovie(movie)}
+                    >
+                        Save
+                    </div>
+                </div>
             ))}
         </div>
     );
